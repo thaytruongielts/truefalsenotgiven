@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Giảng Tương Tác: True, False, Not Given</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .lesson-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .slide-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+        .reading-passage {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .option-label {
+            display: block;
+            background-color: #edf2f7;
+            padding: 0.8rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            font-size: 1rem;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+        }
+        .option-label:hover {
+            background-color: #e2e8f0;
+            transform: translateY(-2px);
+        }
+        .option-input:checked + .option-label {
+            background-color: #63b3ed;
+            color: white;
+            border-color: #4299e1;
+            box-shadow: 0 4px 6px rgba(66, 153, 225, 0.3);
+        }
+        .option-input {
+            display: none;
+        }
+        .button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .button:hover:enabled {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .quiz-check-button {
+            background-color: #dc2626;
+            color: white;
+        }
+        .quiz-check-button:hover:enabled {
+            background-color: #b91c1c;
+        }
+        .lesson-nav-button {
+            background-color: #48bb78;
+            color: white;
+        }
+        .lesson-nav-button:hover:enabled {
+            background-color: #38a169;
+        }
+        .feedback-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .feedback-correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .final-message {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .restart-button {
+            background-color: #f6ad55;
+            color: white;
+            margin-top: 1rem;
+        }
+        .restart-button:hover:enabled {
+            background-color: #ed8936;
+        }
+    </style>
+</head>
+<body>
+    <div class="lesson-container">
+        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Bài Giảng Tương Tác: True, False, Not Given</h1>
+
+        <div id="lesson-slides">
+            <div id="slide-0" class="lesson-slide">
+                <h2 class="slide-title">Slide 1: Giới thiệu</h2>
+                <p class="slide-content">Chào mừng bạn đến với bài học về **True, False, Not Given** (T/F/NG) - một trong những dạng bài phổ biến nhất trong IELTS Reading. Dạng bài này kiểm tra khả năng của bạn trong việc xác định liệu một thông tin có đúng, sai, hay không được đề cập trong bài đọc.</p>
+                <p class="slide-content">Việc nắm vững cách phân biệt ba đáp án này là chìa khóa để đạt điểm cao ở dạng bài này. Hãy cùng đi sâu vào từng trường hợp nhé!</p>
+            </div>
+            <div id="slide-1" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 2: TRUE (Đúng)</h2>
+                <p class="slide-content">Đáp án là **TRUE** khi thông tin trong câu hỏi **hoàn toàn đồng ý** (agrees) với thông tin trong bài đọc. Điều này có nghĩa là bạn có thể tìm thấy một câu hoặc một cụm từ trong bài đọc có cùng ý nghĩa với câu hỏi.</p>
+                <p class="slide-content">**Lưu ý:** Thông tin có thể được diễn đạt bằng từ đồng nghĩa (synonyms) hoặc cách diễn đạt khác (paraphrasing), nhưng ý nghĩa cốt lõi phải giống nhau.</p>
+                <p class="slide-content">**Ví dụ:**</p>
+                <p class="slide-content">• **Bài đọc:** "The population of penguins in the Antarctic has decreased by 20% over the last decade."</p>
+                <p class="slide-content">• **Câu hỏi:** "Fewer penguins are living in the Antarctic now compared to ten years ago."</p>
+                <p class="slide-content">→ **Đáp án: TRUE.** "Fewer penguins" và "population has decreased" có cùng ý nghĩa.</p>
+            </div>
+            <div id="slide-2" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 3: FALSE (Sai)</h2>
+                <p class="slide-content">Đáp án là **FALSE** khi thông tin trong câu hỏi **trái ngược** (contradicts) với thông tin trong bài đọc. Bạn có thể tìm thấy thông tin trong bài đọc và nó trực tiếp phủ nhận câu hỏi.</p>
+                <p class="slide-content">**Lưu ý:** Từ khóa có thể giống nhau, nhưng ý nghĩa tổng thể lại đối lập nhau.</p>
+                <p class="slide-content">**Ví dụ:**</p>
+                <p class="slide-content">• **Bài đọc:** "The Amazon is the world's largest tropical rainforest."</p>
+                <p class="slide-content">• **Câu hỏi:** "The Amazon is the second largest tropical rainforest in the world."</p>
+                <p class="slide-content">→ **Đáp án: FALSE.** "The largest" trái ngược với "the second largest".</p>
+            </div>
+            <div id="slide-3" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 4: NOT GIVEN (Không được đề cập)</h2>
+                <p class="slide-content">Đáp án là **NOT GIVEN** khi thông tin trong câu hỏi **không thể được xác nhận** (impossible to verify) từ bài đọc. Thông tin đó có thể đúng trong thực tế, nhưng nó không có trong bài đọc bạn đang làm.</p>
+                <p class="slide-content">**Lưu ý:** Bạn không nên dùng kiến thức nền (background knowledge) của mình. Hãy chỉ tập trung vào thông tin được cung cấp trong bài đọc.</p>
+                <p class="slide-content">**Ví dụ:**</p>
+                <p class="slide-content">• **Bài đọc:** "The company's new product was launched in September."</p>
+                <p class="slide-content">• **Câu hỏi:** "The new product was very popular with customers."</p>
+                <p class="slide-content">→ **Đáp án: NOT GIVEN.** Bài đọc chỉ nói về thời điểm ra mắt, không đề cập đến mức độ phổ biến.</p>
+            </div>
+            <div id="slide-4" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 5: Bài tập thực hành 1</h2>
+                <div class="reading-passage">
+                    <p>The Eiffel Tower, located in Paris, France, was completed in **1889**. It was originally built as the entrance arch to the **1889 World's Fair** and was initially criticized by some of France's leading artists and intellectuals for its design. However, it quickly became a global cultural icon of France and one of the most recognizable structures in the world.</p>
+                </div>
+                <div class="interactive-section mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="font-semibold text-blue-800 mb-4">Câu hỏi: The Eiffel Tower was built for the World's Fair.</p>
+                    <div id="quiz-1-options" class="mb-4">
+                        <input type="radio" name="quiz1" id="q1o1" value="True" class="option-input"><label for="q1o1" class="option-label">A. True</label>
+                        <input type="radio" name="quiz1" id="q1o2" value="False" class="option-input"><label for="q1o2" class="option-label">B. False</label>
+                        <input type="radio" name="quiz1" id="q1o3" value="Not Given" class="option-input"><label for="q1o3" class="option-label">C. Not Given</label>
+                    </div>
+                    <div class="flex justify-center gap-4">
+                        <button class="button quiz-check-button" data-quiz-id="1" data-answer="True">Kiểm Tra</button>
+                    </div>
+                    <div class="feedback-message hidden" id="feedback-1"></div>
+                </div>
+            </div>
+            <div id="slide-5" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 6: Bài tập thực hành 2</h2>
+                <div class="reading-passage">
+                    <p>The human brain is composed of billions of neurons that communicate through electrical and chemical signals. Its weight is approximately **1.4 kg** in an average adult male. The brain is organized into different regions, with each area responsible for specific functions, such as the cerebral cortex for thought and language. The brain's complexity allows it to process information at incredible speed.</p>
+                </div>
+                <div class="interactive-section mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="font-semibold text-blue-800 mb-4">Câu hỏi: The average adult female brain weighs 1.4 kg.</p>
+                    <div id="quiz-2-options" class="mb-4">
+                        <input type="radio" name="quiz2" id="q2o1" value="True" class="option-input"><label for="q2o1" class="option-label">A. True</label>
+                        <input type="radio" name="quiz2" id="q2o2" value="False" class="option-input"><label for="q2o2" class="option-label">B. False</label>
+                        <input type="radio" name="quiz2" id="q2o3" value="Not Given" class="option-input"><label for="q2o3" class="option-label">C. Not Given</label>
+                    </div>
+                    <div class="flex justify-center gap-4">
+                        <button class="button quiz-check-button" data-quiz-id="2" data-answer="Not Given">Kiểm Tra</button>
+                    </div>
+                    <div class="feedback-message hidden" id="feedback-2"></div>
+                </div>
+            </div>
+            <div id="slide-6" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 7: Bài tập thực hành 3</h2>
+                <div class="reading-passage">
+                    <p>Renewable energy sources like wind and solar are gaining traction worldwide. Governments and private companies are investing heavily in these technologies to reduce carbon emissions. The transition to a renewable energy grid is challenging but is considered a necessary step for combating climate change. The cost of generating solar power is now **cheaper** than generating power from fossil fuels in many parts of the world.</p>
+                </div>
+                <div class="interactive-section mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="font-semibold text-blue-800 mb-4">Câu hỏi: It is more expensive to generate solar power than to use fossil fuels in all regions of the world.</p>
+                    <div id="quiz-3-options" class="mb-4">
+                        <input type="radio" name="quiz3" id="q3o1" value="True" class="option-input"><label for="q3o1" class="option-label">A. True</label>
+                        <input type="radio" name="quiz3" id="q3o2" value="False" class="option-input"><label for="q3o2" class="option-label">B. False</label>
+                        <input type="radio" name="quiz3" id="q3o3" value="Not Given" class="option-input"><label for="q3o3" class="option-label">C. Not Given</label>
+                    </div>
+                    <div class="flex justify-center gap-4">
+                        <button class="button quiz-check-button" data-quiz-id="3" data-answer="False">Kiểm Tra</button>
+                    </div>
+                    <div class="feedback-message hidden" id="feedback-3"></div>
+                </div>
+            </div>
+            <div id="slide-7" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 8: Chiến lược làm bài</h2>
+                <p class="slide-content">Để làm bài T/F/NG hiệu quả, hãy làm theo các bước sau:</p>
+                <ol class="list-decimal list-inside slide-content">
+                    <li>**Đọc câu hỏi trước:** Hãy đọc và phân tích từng câu hỏi, gạch chân các từ khóa chính.</li>
+                    <li>**Tìm vị trí:** Dùng kỹ năng **Scanning** để tìm vị trí của từ khóa trong bài đọc.</li>
+                    <li>**So sánh kỹ lưỡng:** Đọc kỹ câu chứa từ khóa và so sánh ý nghĩa của nó với câu hỏi. Đây là bước quan trọng nhất.</li>
+                    <li>**Phân loại:**
+                        <ul>
+                            <li>Nếu ý nghĩa **giống hệt** → **TRUE**</li>
+                            <li>Nếu ý nghĩa **trái ngược** → **FALSE**</li>
+                            <li>Nếu thông tin **không đủ để kết luận** → **NOT GIVEN**</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div id="slide-8" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 9: Bài tập thực hành tổng hợp</h2>
+                <div class="reading-passage">
+                    <p>The city of Venice, built on more than **100 small islands** in a lagoon in the Adriatic Sea, is known for its canals and historic architecture. For centuries, the main mode of transportation has been by boat, with gondolas and vaporettos navigating the waterways. The city's famous carnival attracts millions of tourists every year. However, Venice is also facing a serious threat from rising sea levels, which is causing more frequent flooding and damage to its buildings. Experts predict that if sea levels continue to rise, the city could be submerged by the end of this century.</p>
+                </div>
+                <div class="interactive-section mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="font-semibold text-blue-800 mb-4">Câu hỏi: Venice is built on fewer than 100 small islands.</p>
+                    <div id="quiz-4-options" class="mb-4">
+                        <input type="radio" name="quiz4" id="q4o1" value="True" class="option-input"><label for="q4o1" class="option-label">A. True</label>
+                        <input type="radio" name="quiz4" id="q4o2" value="False" class="option-input"><label for="q4o2" class="option-label">B. False</label>
+                        <input type="radio" name="quiz4" id="q4o3" value="Not Given" class="option-input"><label for="q4o3" class="option-label">C. Not Given</label>
+                    </div>
+                    <div class="flex justify-center gap-4">
+                        <button class="button quiz-check-button" data-quiz-id="4" data-answer="False">Kiểm Tra</button>
+                    </div>
+                    <div class="feedback-message hidden" id="feedback-4"></div>
+                </div>
+            </div>
+            <div id="slide-9" class="lesson-slide hidden">
+                <h2 class="slide-title">Slide 10: Tổng kết và lời khuyên</h2>
+                <p class="slide-content">Chúc mừng bạn đã hoàn thành bài học về T/F/NG!</p>
+                <p class="slide-content">Hãy nhớ:</p>
+                <ul>
+                    <li>**TRUE** = Đồng ý với bài đọc.</li>
+                    <li>**FALSE** = Trái ngược với bài đọc.</li>
+                    <li>**NOT GIVEN** = Không có thông tin để xác nhận.</li>
+                </ul>
+                <p class="slide-content">Luyện tập thường xuyên với các bài đọc đa dạng sẽ giúp bạn phát triển khả năng nhận diện các bẫy và làm bài nhanh, chính xác hơn. Chúc bạn học tốt!</p>
+            </div>
+            <div id="final-screen" class="lesson-slide hidden">
+                <h2 class="slide-title">Hoàn Thành Bài Giảng!</h2>
+                <p class="final-message">🎉 Chúc mừng! Bạn đã hoàn thành bài giảng tương tác về True, False, Not Given!</p>
+                <button id="restart-lesson-button" class="button restart-button w-full mt-8">Học Lại Bài Giảng</button>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-8">
+            <button id="prev-slide-button" class="button lesson-nav-button" disabled>Slide Trước</button>
+            <span id="slide-indicator" class="text-lg font-semibold text-gray-700">Slide 1 / 10</span>
+            <button id="next-slide-button" class="button lesson-nav-button">Slide Tiếp Theo</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.lesson-slide');
+        const prevButton = document.getElementById('prev-slide-button');
+        const nextButton = document.getElementById('next-slide-button');
+        const slideIndicator = document.getElementById('slide-indicator');
+        const restartLessonButton = document.getElementById('restart-lesson-button');
+        const totalLessonSlides = slides.length - 1;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.add('hidden');
+                if (i === index) {
+                    slide.classList.remove('hidden');
+                }
+            });
+
+            prevButton.disabled = (index === 0);
+            
+            if (index < totalLessonSlides) {
+                nextButton.classList.remove('hidden');
+            } else {
+                nextButton.classList.add('hidden');
+            }
+
+            if (index < totalLessonSlides) {
+                slideIndicator.textContent = `Slide ${index + 1} / ${totalLessonSlides}`;
+            } else {
+                slideIndicator.textContent = `Hoàn thành!`;
+            }
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentSlideIndex < totalLessonSlides) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        });
+
+        restartLessonButton.addEventListener('click', () => {
+            currentSlideIndex = 0;
+            showSlide(currentSlideIndex);
+            document.querySelectorAll('.interactive-section input').forEach(input => {
+                input.disabled = false;
+                input.checked = false;
+            });
+            document.querySelectorAll('.feedback-message').forEach(feedback => {
+                feedback.classList.add('hidden');
+                feedback.textContent = '';
+                feedback.classList.remove('feedback-correct', 'feedback-incorrect');
+            });
+            document.querySelectorAll('.quiz-check-button').forEach(button => {
+                button.disabled = true;
+                button.classList.remove('hidden');
+            });
+        });
+
+        document.querySelectorAll('.quiz-check-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const quizId = e.target.dataset.quizId;
+                const correctAnswer = e.target.dataset.answer;
+                const feedbackDiv = document.getElementById(`feedback-${quizId}`);
+                const selectedOption = document.querySelector(`input[name="quiz${quizId}"]:checked`);
+                
+                feedbackDiv.classList.remove('hidden', 'feedback-correct', 'feedback-incorrect');
+                
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    feedbackDiv.classList.add('feedback-correct');
+                    feedbackDiv.textContent = 'Chính xác! 🎉';
+                    
+                    e.target.disabled = true;
+                    setTimeout(() => {
+                        currentSlideIndex++;
+                        showSlide(currentSlideIndex);
+                    }, 1500);
+                } else {
+                    feedbackDiv.classList.add('feedback-incorrect');
+                    feedbackDiv.textContent = 'Chưa đúng, hãy thử lại!';
+                }
+            });
+        });
+
+        document.querySelectorAll('.interactive-section input[type="radio"]').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const quizId = e.target.name.replace('quiz', '');
+                const checkButton = document.querySelector(`.quiz-check-button[data-quiz-id="${quizId}"]`);
+                if (checkButton) {
+                    checkButton.disabled = false;
+                }
+            });
+        });
+
+        document.querySelectorAll('.quiz-check-button').forEach(button => {
+            button.disabled = true;
+        });
+
+        showSlide(currentSlideIndex);
+    </script>
+</body>
+</html>
